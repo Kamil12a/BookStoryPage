@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.containerOfBooks {
+  background-color: #e5e4e2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.singleBookContainer {
+  margin-top: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: white;
+  padding: 30px;
+  font-size: 1.2em;
+  width: 50%;
+  border-radius: 20px;
+  background-color: #4d8eeb;
+  letter-spacing: 1.2px;
+}
+.buttonExpand{
+  margin: 20px;
+  display: block;
+  width: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: yellow;
+}
