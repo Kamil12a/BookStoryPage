@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../styles/displayBooks.css";
+import { SingleBook } from "./SingleBookDisplay";
 export function DisplayBooks({ allBook }) {
   const [filteredAllBooks, setfilteredAllBooks] = useState([]);
   useEffect(() => {
@@ -7,13 +7,10 @@ export function DisplayBooks({ allBook }) {
   }, [allBook]);
 
   const cutToLongText = (book, limit) => {
-    if (book.description !== undefined) {
-      book.description = book.description.substring(0, limit) + "...";
+    if (book.description !== undefined && book.description.length>200 ) {
       book.descriptionExpand = book.description;
-      book.expandText = false;
-    } else {
-      book.description = "brak";
-    }
+      book.description = book.description.substring(0, limit) + "...";
+    } 
     return book;
   };
 
@@ -21,59 +18,18 @@ export function DisplayBooks({ allBook }) {
     if ("items" in allBook) {
       let filteredAllBooks = [];
       allBook.items.forEach((book) => {
-        let bookLimitedCh = cutToLongText(book.volumeInfo, 200);
+        let bookLimitedCh = cutToLongText(book.volumeInfo, 202);
         filteredAllBooks.push(bookLimitedCh);
       });
       setfilteredAllBooks(filteredAllBooks);
     }
-  };
-  const handleChange = (e) => {
-    setfilteredAllBooks((datas) => {
-      datas[e.target.id].expandText = true;
-      if (true) {
-        return [...datas];
-      }
-    });
   };
   return (
     <>
       {filteredAllBooks && (
         <div className="containerOfBooks">
           {filteredAllBooks.map((book, index) => {
-            return (
-              <div key={index} className="singleBookContainer">
-                <p> title: {book.title}</p>
-                <p> author: {book.authors}</p>
-                <p> data: {book.publishedDate}</p>
-                {book.hasOwnProperty("descriptionExpand") && (
-                  <>
-                    {book.expandText && (
-                      <>
-                        <p className="descriptionOfBook">
-                          {" "}
-                          opis: {book.descriptionExpand}
-                        </p>
-                        <button className="buttonExpand">rozwin</button>
-                      </>
-                    )}
-                    {!book.expandText && (
-                      <>
-                        <p className="descriptionOfBook">
-                          {" "}
-                          opis: {book.description}
-                        </p>
-                        <button id={index} className="buttonExpand">
-                          rozwin
-                        </button>
-                      </>
-                    )}
-                  </>
-                )}
-                {book.hasOwnProperty("imageLinks") && (
-                  <img src={book.imageLinks.thumbnail}></img>
-                )}
-              </div>
-            );
+            return <SingleBook key={index} book={book} index={index} />;
           })}
         </div>
       )}
