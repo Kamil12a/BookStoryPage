@@ -1,5 +1,4 @@
 export function filterAllBooks(allBook, setfilteredAllBooks) {
-  console.log(allBook);
   let allBooksConcat = [...allBook[0].items, ...allBook[1].items];
   let filteredAllBooks = [];
   allBooksConcat.forEach((book) => {

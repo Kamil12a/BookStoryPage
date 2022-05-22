@@ -4,9 +4,19 @@ import { filterAllBooks } from "./filterAllBooks";
 export function DisplayBooks({ allBook }) {
   const [filteredAllBooks, setfilteredAllBooks] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [pageNumber, setPageNumber] = useState(15);
   useEffect(() => {
     filterAllBooks(allBook, setfilteredAllBooks);
+    window.addEventListener("scroll", pageNumberAdd);
   }, [allBook]);
+  const pageNumberAdd = () => {
+    if (
+      window.scrollY + window.innerHeight >=
+      document.documentElement.scrollHeight
+    ) {
+      setPageNumber((pageNumber) => pageNumber + 1);
+    }
+  };
   const handleChangeInput = (e) => {
     let textValue = e.target.value;
     setSearchValue(textValue);
@@ -24,14 +34,16 @@ export function DisplayBooks({ allBook }) {
             cols="33"
           ></textarea>
           {filteredAllBooks.map((book, index) => {
-            return (
-              <SingleBook
-                key={index}
-                book={book}
-                index={index}
-                searchInput={searchValue.toLowerCase()}
-              />
-            );
+            if (index < pageNumber) {
+              return (
+                <SingleBook
+                  key={index}
+                  book={book}
+                  index={index}
+                  searchInput={searchValue.toLowerCase()}
+                />
+              );
+            }
           })}
         </div>
       )}
