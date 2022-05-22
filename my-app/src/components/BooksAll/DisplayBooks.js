@@ -3,7 +3,6 @@ import { SingleBook } from "./SingleBookDisplay";
 import { filterAllBooks } from "./filterAllBooks";
 export function DisplayBooks({ allBook }) {
   const [filteredAllBooks, setfilteredAllBooks] = useState([]);
-  
   const [searchValue, setSearchValue] = useState("");
   useEffect(() => {
     filterAllBooks(allBook, setfilteredAllBooks);
