@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { SingleBook } from "./SingleBookDisplay";
+import { SingleBook } from "./singleBookDisplay/SingleBookDisplay";
 import { filterAllBooks } from "./filterAllBooks";
 export function DisplayBooks({ allBook }) {
   const [filteredAllBooks, setfilteredAllBooks] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [pageNumber, setPageNumber] = useState(15);
+
   useEffect(() => {
     filterAllBooks(allBook, setfilteredAllBooks);
     window.addEventListener("scroll", pageNumberAdd);
   }, [allBook]);
+
   const pageNumberAdd = () => {
     if (
       window.scrollY + window.innerHeight >=
@@ -17,10 +19,12 @@ export function DisplayBooks({ allBook }) {
       setPageNumber((pageNumber) => pageNumber + 1);
     }
   };
+
   const handleChangeInput = (e) => {
     let textValue = e.target.value;
     setSearchValue(textValue);
   };
+
   return (
     <>
       {filteredAllBooks && (
@@ -43,7 +47,7 @@ export function DisplayBooks({ allBook }) {
                   searchInput={searchValue.toLowerCase()}
                 />
               );
-            }
+            } else return null
           })}
         </div>
       )}
