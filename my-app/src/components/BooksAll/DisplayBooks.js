@@ -1,35 +1,38 @@
 import { useEffect, useState } from "react";
 import { SingleBook } from "./SingleBookDisplay";
+import { filterAllBooks } from "./filterAllBooks";
 export function DisplayBooks({ allBook }) {
   const [filteredAllBooks, setfilteredAllBooks] = useState([]);
+  
+  const [searchValue, setSearchValue] = useState("");
   useEffect(() => {
-    filterAllBooks();
+    filterAllBooks(allBook, setfilteredAllBooks);
   }, [allBook]);
-
-  const cutToLongText = (book, limit) => {
-    if (book.description !== undefined && book.description.length>200 ) {
-      book.descriptionExpand = book.description;
-      book.description = book.description.substring(0, limit) + "...";
-    } 
-    return book;
-  };
-
-  const filterAllBooks = () => {
-    if ("items" in allBook) {
-      let filteredAllBooks = [];
-      allBook.items.forEach((book) => {
-        let bookLimitedCh = cutToLongText(book.volumeInfo, 202);
-        filteredAllBooks.push(bookLimitedCh);
-      });
-      setfilteredAllBooks(filteredAllBooks);
-    }
+  const handleChangeInput = (e) => {
+    let textValue = e.target.value;
+    setSearchValue(textValue);
   };
   return (
     <>
       {filteredAllBooks && (
         <div className="containerOfBooks">
+          <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
+          <textarea
+            onChange={handleChangeInput}
+            id="bookInput"
+            name="story"
+            rows="5"
+            cols="33"
+          ></textarea>
           {filteredAllBooks.map((book, index) => {
-            return <SingleBook key={index} book={book} index={index} />;
+            return (
+              <SingleBook
+                key={index}
+                book={book}
+                index={index}
+                searchInput={searchValue.toLowerCase()}
+              />
+            );
           })}
         </div>
       )}

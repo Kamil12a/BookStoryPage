@@ -3,12 +3,15 @@ import { fetchBooks } from "./fetchBooks";
 import { DisplayBooks } from "./DisplayBooks";
 export function BooksAll() {
   const [allBooksObject, setAllBooksObject] = useState([]);
+  const [state, setState] = useState("InnitialState");
   useEffect(() => {
-    fetchBooks(setAllBooksObject);
+    fetchBooks(setAllBooksObject, setState);
   }, []);
   return (
     <>
-      <DisplayBooks allBook={allBooksObject} />
+      {state === "loading" && <p>ładuje...</p>}
+      {state === "error" && <p>błąd</p>}
+      {state === "loaded" && <DisplayBooks allBook={allBooksObject} />}
     </>
   );
 }
