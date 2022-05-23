@@ -8,10 +8,10 @@ export function DisplayBooks({ allBook }) {
 
   useEffect(() => {
     filterAllBooks(allBook, setfilteredAllBooks);
-    window.addEventListener("scroll", pageNumberAdd);
+    window.addEventListener("scroll", infiniteScroll);
   }, [allBook]);
 
-  const pageNumberAdd = () => {
+  const infiniteScroll = () => {
     if (
       window.scrollY + window.innerHeight >=
       document.documentElement.scrollHeight
