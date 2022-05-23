@@ -3,7 +3,7 @@ import { SingleBook } from "./singleBookDisplay/SingleBookDisplay";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/BookContext";
 
-export function DisplayBooks({ allBook }) {
+export function DisplayBooks() {
   const [searchValue, setSearchValue] = useState("");
   const [pageNumber, setPageNumber] = useState(15);
   const theme = useContext(ThemeContext);
@@ -29,14 +29,17 @@ export function DisplayBooks({ allBook }) {
       {" "}
       {theme.books && (
         <div className="containerOfBooks">
-          <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
-          <textarea
-            onChange={handleChangeInput}
-            id="bookInput"
-            name="story"
-            rows="5"
-            cols="33"
-          ></textarea>
+          <div className="searchForAbook">
+            <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
+            <textarea
+              onChange={handleChangeInput}
+              id="bookInput"
+              name="story"
+              rows="5"
+              cols="33"
+            ></textarea>
+          </div>
+
           {theme.books.map((book, index) => {
             if (index < pageNumber) {
               return (
