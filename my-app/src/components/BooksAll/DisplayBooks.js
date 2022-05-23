@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { SingleBook } from "./singleBookDisplay/SingleBookDisplay";
-import { filterAllBooks } from "./filterAllBooks";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/BookContext";
+
 export function DisplayBooks({ allBook }) {
-  const [filteredAllBooks, setfilteredAllBooks] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [pageNumber, setPageNumber] = useState(15);
-
+  const theme = useContext(ThemeContext);
   useEffect(() => {
-    filterAllBooks(allBook, setfilteredAllBooks);
     window.addEventListener("scroll", infiniteScroll);
-  }, [allBook]);
+  }, []);
 
   const infiniteScroll = () => {
     if (
@@ -19,7 +19,6 @@ export function DisplayBooks({ allBook }) {
       setPageNumber((pageNumber) => pageNumber + 1);
     }
   };
-
   const handleChangeInput = (e) => {
     let textValue = e.target.value;
     setSearchValue(textValue);
@@ -27,7 +26,8 @@ export function DisplayBooks({ allBook }) {
 
   return (
     <>
-      {filteredAllBooks && (
+      {" "}
+      {theme.books && (
         <div className="containerOfBooks">
           <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
           <textarea
@@ -37,7 +37,7 @@ export function DisplayBooks({ allBook }) {
             rows="5"
             cols="33"
           ></textarea>
-          {filteredAllBooks.map((book, index) => {
+          {theme.books.map((book, index) => {
             if (index < pageNumber) {
               return (
                 <SingleBook
@@ -47,7 +47,7 @@ export function DisplayBooks({ allBook }) {
                   searchInput={searchValue.toLowerCase()}
                 />
               );
-            } else return null
+            } else return null;
           })}
         </div>
       )}
