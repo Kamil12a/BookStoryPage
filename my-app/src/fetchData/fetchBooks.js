@@ -9,10 +9,11 @@ let bookGreenWood = fetch(
 const sortAllBooks = (allBook) => {
   let allBooksConcat = [...allBook[0].items, ...allBook[1].items];
   let filteredAllBooks = [];
-  allBooksConcat.forEach((book) => {
+  allBooksConcat.forEach((book, index) => {
     let bookLimitedCh = addShorterDescription(book.volumeInfo);
     let bookSorted = addIsBookInLibrary(bookLimitedCh);
     filteredAllBooks.push(bookSorted);
+    filteredAllBooks[index].id=allBooksConcat[index].id
   });
   return filteredAllBooks;
 };
@@ -33,10 +34,7 @@ export async function fetchBooks(setState, setBooks) {
   let results = await Promise.all([booksHobbit, bookGreenWood]).catch(() => {
     setState("error");
   });
-  
+
   setState("loaded");
   setBooks(sortAllBooks(results));
 }
-
-
-
