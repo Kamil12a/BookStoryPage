@@ -5,8 +5,8 @@ import { ThemeContext } from "../context/BookContext";
 
 export function DisplayBooks() {
   const [pageNumber, setPageNumber] = useState(15);
-  const [allBooks, setAllBooks] = useState(null);
   const theme = useContext(ThemeContext);
+  const [allBooks, setAllBooks] = useState(theme.books);
   useEffect(() => {
     window.addEventListener("scroll", infiniteScroll);
   }, []);
@@ -20,24 +20,21 @@ export function DisplayBooks() {
     }
   };
   const filterBooksByInput = (e) => {
-    let textValue = e.target.value.toLowerCase();
-    let filterBooks = [];
-    (allBooks ? allBooks : theme.books).forEach((book) => {
+    let text = e.target.value.toLowerCase();
+    let filteredBooks = [];
+    theme.books.forEach((book) => {
       let title = book.title.toLowerCase();
-      if (title.includes(textValue)) {
-        filterBooks.push(book);
+      if (title.includes(text)) {
+        filteredBooks.push(book);
       }
     });
-    if (!allBooks) {
-      setAllBooks(theme.books);
-    }
-    theme.setBooks(filterBooks);
+    setAllBooks(filteredBooks);
   };
 
   return (
     <>
       {" "}
-      {theme.books && (
+      {allBooks && (
         <div className="containerOfBooks">
           <div className="searchForAbook">
             <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
@@ -50,7 +47,7 @@ export function DisplayBooks() {
             ></textarea>
           </div>
 
-          {theme.books.map((book, index) => {
+          {allBooks.map((book, index) => {
             if (index < pageNumber) {
               return <SingleBook key={index} book={book} id={index} />;
             } else return null;

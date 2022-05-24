@@ -17,7 +17,7 @@ function App() {
         <ThemeContext.Provider value={{ books, setBooks }}>
           <Router>
             <Routes>
-              <Route exact path="/" element={<DisplayBooks />}></Route>
+              <Route exact path="/" element={<DisplayBooks/>}></Route>
             </Routes>
           </Router>
         </ThemeContext.Provider>
