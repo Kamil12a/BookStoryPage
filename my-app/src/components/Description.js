@@ -1,6 +1,6 @@
-import "../../styles/displayBooks.css";
+import "../styles/displayBooks.css";
 import { useState } from "react";
-export function Description({ book, index }) {
+export function Description({ book, id }) {
   const [showDescription, setShowDescription] = useState(false);
 
   const handleClick = () => {
@@ -12,10 +12,7 @@ export function Description({ book, index }) {
         <>
           {showDescription && (
             <>
-              <p className="descriptionOfBook">
-                {" "}
-                opis: {book.description}
-              </p>
+              <p className="descriptionOfBook"> opis: {book.description}</p>
               <button onClick={handleClick} className="buttonExpand">
                 skróc
               </button>
@@ -23,8 +20,11 @@ export function Description({ book, index }) {
           )}
           {!showDescription && (
             <>
-              <p className="descriptionOfBook"> opis: {book.descriptionShorter}</p>
-              <button onClick={handleClick} id={index} className="buttonExpand">
+              <p className="descriptionOfBook">
+                {" "}
+                opis: {book.descriptionShorter}...
+              </p>
+              <button onClick={handleClick} id={id} className="buttonExpand">
                 rozwin
               </button>
             </>
@@ -33,7 +33,7 @@ export function Description({ book, index }) {
       )}
       {!book.hasOwnProperty("descriptionShorter") && (
         <>
-          <p className="descriptionOfBook"> opis: {book.description}</p>
+          <p className="descriptionOfBook"> opis: brak</p>
         </>
       )}
     </>

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { SingleBook } from "./singleBookDisplay/SingleBookDisplay";
+import { SingleBook } from "./SingleBookDisplay";
 import { useContext } from "react";
 import { ThemeContext } from "../context/BookContext";
-import { Link } from "react-router-dom";
 
 export function DisplayBooks() {
-  const [searchValue, setSearchValue] = useState("");
   const [pageNumber, setPageNumber] = useState(15);
+  const [allBooks, setAllBooks] = useState(null);
   const theme = useContext(ThemeContext);
   useEffect(() => {
     window.addEventListener("scroll", infiniteScroll);
@@ -20,9 +19,19 @@ export function DisplayBooks() {
       setPageNumber((pageNumber) => pageNumber + 1);
     }
   };
-  const handleChangeInput = (e) => {
-    let textValue = e.target.value;
-    setSearchValue(textValue);
+  const filterBooksByInput = (e) => {
+    let textValue = e.target.value.toLowerCase();
+    let filterBooks = [];
+    (allBooks ? allBooks : theme.books).forEach((book) => {
+      let title = book.title.toLowerCase();
+      if (title.includes(textValue)) {
+        filterBooks.push(book);
+      }
+    });
+    if (!allBooks) {
+      setAllBooks(theme.books);
+    }
+    theme.setBooks(filterBooks);
   };
 
   return (
@@ -30,28 +39,20 @@ export function DisplayBooks() {
       {" "}
       {theme.books && (
         <div className="containerOfBooks">
-        
           <div className="searchForAbook">
             <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
             <textarea
-              onChange={handleChangeInput}
+              onChange={filterBooksByInput}
               id="bookInput"
               name="story"
               rows="5"
               cols="33"
             ></textarea>
           </div>
-          <Link to="/library">Your library</Link> {" "}
+
           {theme.books.map((book, index) => {
             if (index < pageNumber) {
-              return (
-                <SingleBook
-                  key={index}
-                  book={book}
-                  index={index}
-                  searchInput={searchValue.toLowerCase()}
-                />
-              );
+              return <SingleBook key={index} book={book} id={index} />;
             } else return null;
           })}
         </div>

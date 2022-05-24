@@ -30,7 +30,7 @@
   background-color: yellow;
 }
 .searchForAbook{
-  position: absolute;
+  position: fixed;
   left: 20px;
   top: 20px;
   

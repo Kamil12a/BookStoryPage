@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeContext } from "./context/BookContext";
 import { useEffect, useState } from "react";
-import { Library } from "./components/Library";
 import { fetchBooks } from "./fetchData/fetchBooks";
 import { DisplayBooks } from "./components/DisplayBooks";
 function App() {
@@ -14,13 +13,11 @@ function App() {
     <>
       {state === "loading" && <p>ładuje...</p>}
       {state === "error" && <p>błąd</p>}
-
       {state === "loaded" && (
         <ThemeContext.Provider value={{ books, setBooks }}>
           <Router>
             <Routes>
               <Route exact path="/" element={<DisplayBooks />}></Route>
-              <Route path="/library" element={<Library />}></Route>
             </Routes>
           </Router>
         </ThemeContext.Provider>
