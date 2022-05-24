@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { SingleBook } from "../singleBookDisplay/SingleBookDisplay";
+import { SingleBook } from "./singleBookDisplay/SingleBookDisplay";
 import { useContext } from "react";
-import { ThemeContext } from "../../context/BookContext";
+import { ThemeContext } from "../context/BookContext";
 import { Link } from "react-router-dom";
 
 export function DisplayBooks() {

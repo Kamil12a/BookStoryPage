@@ -7,14 +7,15 @@ export function AddBookToLibrary({ container, index }) {
   const [addToBookState, setaddToBookState] = useState("false");
   useEffect(() => {}, [addToBookState]);
   const addBookToLibrary = () => {
+    
     if (theme.books[index].isInLibrary) {
       let booksWithElementInLibrary = theme.books;
       booksWithElementInLibrary[index].isInLibrary = false;
       theme.setBooks(booksWithElementInLibrary);
       container.current.style.background = "#4d8eeb";
-
       setaddToBookState("false");
-    } else {
+    } 
+    else {
       let booksWithElementInLibrary = theme.books;
       booksWithElementInLibrary[index].isInLibrary = true;
       theme.setBooks(booksWithElementInLibrary);

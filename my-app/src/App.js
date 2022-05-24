@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeContext } from "./context/BookContext";
 import { useEffect, useState } from "react";
-import { Library } from "./components/Library/Library";
+import { Library } from "./components/Library";
 import { fetchBooks } from "./fetchData/fetchBooks";
-import { DisplayBooks } from "./components/BooksAll/DisplayBooks";
+import { DisplayBooks } from "./components/DisplayBooks";
 function App() {
   const [books, setBooks] = useState(null);
   const [state, setState] = useState("innitial State");
@@ -28,7 +28,4 @@ function App() {
     </>
   );
 }
-
 export default App;
-
-//       {state === "loaded" && <DisplayBooks />}
