@@ -1,24 +1,34 @@
-import { BooksAll } from "./components/BooksAll/BooksAll";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeContext } from "./context/BookContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Library } from "./components/Library/Library";
+import { fetchBooks } from "./fetchData/fetchBooks";
+import { DisplayBooks } from "./components/BooksAll/DisplayBooks";
 function App() {
   const [books, setBooks] = useState(null);
+  const [state, setState] = useState("innitial State");
+  useEffect(() => {
+    fetchBooks(setState, setBooks);
+  }, []);
   return (
     <>
-      <ThemeContext.Provider value={{books, setBooks}}>
-        <Router>
-          <Routes>
-            <Route exact path="/" element={<BooksAll />}></Route>
+      {state === "loading" && <p>ładuje...</p>}
+      {state === "error" && <p>błąd</p>}
 
-            <Route path="/everyBooks" element={<BooksAll />}></Route>
-            <Route path="/xd" element={<Library />}></Route>
-          </Routes>
-        </Router>
-      </ThemeContext.Provider>
+      {state === "loaded" && (
+        <ThemeContext.Provider value={{ books, setBooks }}>
+          <Router>
+            <Routes>
+              <Route exact path="/" element={<DisplayBooks />}></Route>
+              <Route path="/library" element={<Library />}></Route>
+            </Routes>
+          </Router>
+        </ThemeContext.Provider>
+      )}
     </>
   );
 }
 
 export default App;
+
+//       {state === "loaded" && <DisplayBooks />}

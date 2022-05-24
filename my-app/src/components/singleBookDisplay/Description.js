@@ -1,4 +1,4 @@
-import "../../../styles/displayBooks.css";
+import "../../styles/displayBooks.css";
 import { useState } from "react";
 export function Description({ book, index }) {
   const [showDescription, setShowDescription] = useState(false);

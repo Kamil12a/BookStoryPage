@@ -1,5 +1,5 @@
 import { useRef} from "react";
-import "../../../styles/displayBooks.css";
+import "../../styles/displayBooks.css";
 import { AddBookToLibrary } from "./AddToLibrary";
 import { Description } from "./Description";
 

@@ -6,13 +6,14 @@ let bookGreenWood = fetch(
   "https://www.googleapis.com/books/v1/volumes?q=search+terms"
 ).then((resp) => resp.json());
 
-export async function fetchBooks(setState, contextBook) {
+export async function fetchBooks(setState, setBooks) {
   setState("loading");
   let results = await Promise.all([booksHobbit, bookGreenWood]).catch(() => {
     setState("error");
   });
+  console.log()
   setState("loaded");
-  contextBook.setBooks(sortAllBooks(results));
+  setBooks(sortAllBooks(results));
 }
 
 const sortAllBooks = (allBook) => {

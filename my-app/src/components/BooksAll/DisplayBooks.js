@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { SingleBook } from "./singleBookDisplay/SingleBookDisplay";
+import { SingleBook } from "../singleBookDisplay/SingleBookDisplay";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/BookContext";
+import { Link } from "react-router-dom";
 
 export function DisplayBooks() {
   const [searchValue, setSearchValue] = useState("");
@@ -29,6 +30,7 @@ export function DisplayBooks() {
       {" "}
       {theme.books && (
         <div className="containerOfBooks">
+        
           <div className="searchForAbook">
             <label htmlFor="bookInput">szukaj ksiązki po tytule</label>
             <textarea
@@ -39,7 +41,7 @@ export function DisplayBooks() {
               cols="33"
             ></textarea>
           </div>
-
+          <Link to="/library">Your library</Link> {" "}
           {theme.books.map((book, index) => {
             if (index < pageNumber) {
               return (
