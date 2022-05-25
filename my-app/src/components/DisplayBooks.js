@@ -3,6 +3,8 @@ import { SingleBook } from "./SingleBookDisplay";
 import { useContext } from "react";
 import { ThemeContext } from "../context/BookContext";
 import { BookSearching } from "./BookSearching";
+import { Link } from "react-router-dom";
+
 export function DisplayBooks() {
   const [pageNumber, setPageNumber] = useState(15);
   const theme = useContext(ThemeContext);
@@ -24,6 +26,7 @@ export function DisplayBooks() {
       {" "}
       {allBooks && (
         <div className="containerOfBooks">
+          <Link to="library">twoja Biblioteka </Link>
           <BookSearching theme={theme} setAllBooks={setAllBooks} />
           {allBooks.map((book, index) => {
             if (index < pageNumber) {

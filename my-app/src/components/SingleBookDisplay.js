@@ -1,21 +1,43 @@
+import { useEffect, useState } from "react";
 import "../styles/displayBooks.css";
 import { Description } from "./Description";
 
 export function SingleBook({ book, id }) {
+  const [state, setState] = useState("Innitial State");
+  useEffect(() => {}, [state]);
   const addToLibrary = () => {
-    console.log(id);
+    if (book.isInLibrary) {
+      book.isInLibrary = false;
+      setState("loading");
+    } else {
+      book.isInLibrary = true;
+      setState("loaded");
+    }
   };
   return (
     <>
-      <div className="singleBookContainer">
-        <p> title: {book.title}</p>
-        <p> data: {book.publishedDate}</p>
-        <button onClick={addToLibrary}>xd</button>
-        <Description book={book} id={id} />
-        {book.hasOwnProperty("imageLinks") && (
-          <img alt="book" src={book.imageLinks.thumbnail}></img>
-        )}
-      </div>
+      {book.isInLibrary && (
+        <div style={{ background: "green" }} className="singleBookContainer">
+          <p> tytuł: {book.title}</p>
+          <p> data: {book.publishedDate}</p>
+          <button onClick={addToLibrary}>usuń z twojej biblioteki</button>
+          <Description book={book} id={id} />
+          {book.hasOwnProperty("imageLinks") && (
+            <img alt="book" src={book.imageLinks.thumbnail}></img>
+          )}
+        </div>
+      )}
+      {!book.isInLibrary && (
+        <div className="singleBookContainer">
+          <p> tytuł: {book.title}</p>
+          <p> data: {book.publishedDate}</p>
+          <button onClick={addToLibrary}>dodaj do twojej biblioteki</button>
+          <Description book={book} id={id} />
+          {book.hasOwnProperty("imageLinks") && (
+            <img alt="book" src={book.imageLinks.thumbnail}></img>
+          )}
+        </div>
+      )}
     </>
   );
 }

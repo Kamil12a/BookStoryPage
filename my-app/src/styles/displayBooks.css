@@ -3,13 +3,19 @@
   padding: 0;
 }
 .containerOfBooks {
-  background-color: #e5e4e2;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
+.containerLibrary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .singleBookContainer {
   margin-top: 20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -21,7 +27,7 @@
   background-color: #4d8eeb;
   letter-spacing: 1.2px;
 }
-.buttonExpand{
+.buttonExpand {
   margin: 20px;
   display: block;
   width: 50px;
@@ -29,9 +35,8 @@
   border: none;
   background-color: yellow;
 }
-.searchForAbook{
+.searchForAbook {
   position: fixed;
   left: 20px;
   top: 20px;
-  
 }
