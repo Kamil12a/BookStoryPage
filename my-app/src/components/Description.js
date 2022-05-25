@@ -31,11 +31,12 @@ export function Description({ book, id }) {
           )}
         </>
       )}
-      {!book.hasOwnProperty("descriptionShorter") && (
-        <>
-          <p className="descriptionOfBook"> opis: brak</p>
-        </>
-      )}
+      {!book.hasOwnProperty("descriptionShorter") &&
+        book.description !== undefined && (
+          <>
+            <p className="descriptionOfBook"> opis: {book.description}</p>
+          </>
+        )}
     </>
   );
 }

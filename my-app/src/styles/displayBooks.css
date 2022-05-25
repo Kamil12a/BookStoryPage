@@ -17,6 +17,7 @@
   flex-direction: column;
 }
 .singleBookContainer {
+  text-align: center;
   margin-top: 20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: white;
@@ -36,6 +37,8 @@
   background-color: yellow;
 }
 .searchForAbook {
+  display: flex;
+  align-items: center;
   position: fixed;
   left: 20px;
   top: 20px;

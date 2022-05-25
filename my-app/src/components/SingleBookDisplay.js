@@ -18,24 +18,24 @@ export function SingleBook({ book, id }) {
     <>
       {book.isInLibrary && (
         <div style={{ background: "green" }} className="singleBookContainer">
+          {book.hasOwnProperty("imageLinks") && (
+            <img alt="book" src={book.imageLinks.thumbnail}></img>
+          )}
           <p> tytuł: {book.title}</p>
           <p> data: {book.publishedDate}</p>
           <button onClick={addToLibrary}>usuń z twojej biblioteki</button>
           <Description book={book} id={id} />
-          {book.hasOwnProperty("imageLinks") && (
-            <img alt="book" src={book.imageLinks.thumbnail}></img>
-          )}
         </div>
       )}
       {!book.isInLibrary && (
         <div className="singleBookContainer">
+          {book.hasOwnProperty("imageLinks") && (
+            <img alt="book" src={book.imageLinks.thumbnail}></img>
+          )}
           <p> tytuł: {book.title}</p>
           <p> data: {book.publishedDate}</p>
           <button onClick={addToLibrary}>dodaj do twojej biblioteki</button>
           <Description book={book} id={id} />
-          {book.hasOwnProperty("imageLinks") && (
-            <img alt="book" src={book.imageLinks.thumbnail}></img>
-          )}
         </div>
       )}
     </>

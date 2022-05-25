@@ -18,12 +18,12 @@ export function Library() {
                 style={{ background: "green" }}
                 className="singleBookContainer"
               >
-                <p> tytuł: {book.title}</p>
-                <p> data: {book.publishedDate}</p>
-                <Description book={book} id={book.id} />
                 {book.hasOwnProperty("imageLinks") && (
                   <img alt="book" src={book.imageLinks.thumbnail}></img>
                 )}
+                <p> tytuł: {book.title}</p>
+                <p> data: {book.publishedDate}</p>
+                <Description book={book} id={book.id} />
               </div>
             );
           } else {
