@@ -30,6 +30,7 @@ const addIsBookInLibrary = (book) => {
 };
 
 export async function fetchBooks(setState, setBooks) {
+  console.log("Xd")
   setState("loading");
   let results = await Promise.all([booksHobbit, bookGreenWood]).catch(() => {
     setState("error");
