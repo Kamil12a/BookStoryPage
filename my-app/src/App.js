@@ -19,9 +19,8 @@ function App() {
           <Router>
             <Routes>
               {" "}
-              <Route exact path="/" element={<DisplayBooks />}></Route>
-              <Route path="/BookStory" element={<DisplayBooks />}></Route>
-              <Route path="/library" element={<Library />}></Route>
+              <Route exact path="/BookStory" element={<DisplayBooks />}></Route>
+              <Route path="BookStory/library" element={<Library />}></Route>
             </Routes>
           </Router>
         </ThemeContext.Provider>
